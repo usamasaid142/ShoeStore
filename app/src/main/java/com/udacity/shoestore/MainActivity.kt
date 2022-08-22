@@ -2,16 +2,20 @@ package com.udacity.shoestore
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.udacity.shoestore.databinding.ActivityMainBinding
+import com.udacity.shoestore.utils.ShoeviewmodelFactory
+import com.udacity.shoestore.viewmodel.ShoeViewmodel
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
     private lateinit var navController:NavController
+    lateinit var viewmodel:ShoeViewmodel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,8 @@ class MainActivity : AppCompatActivity() {
        navController = navHostFragment.navController
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController)
+        val viewmodelfactory=ShoeviewmodelFactory()
+        viewmodel= ViewModelProvider(this,viewmodelfactory).get(ShoeViewmodel::class.java)
 
     }
 
