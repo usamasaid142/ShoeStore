@@ -1,14 +1,14 @@
 package com.udacity.shoestore.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
@@ -23,6 +23,7 @@ class ShoeListFragment : Fragment() {
     private lateinit var binding:ShoelistfragmentBinding
     private lateinit var shoeAdapter:ShoeAdapter
     private val args:ShoeListFragmentArgs by navArgs()
+    val list= mutableListOf<Shoe>()
   lateinit var viewModel:ShoeViewmodel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,7 @@ class ShoeListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding=ShoelistfragmentBinding.inflate(layoutInflater,container,false)
-
+          setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -41,7 +42,7 @@ class ShoeListFragment : Fragment() {
 
         callback()
         initbutton()
-        //viewModel.shoes.postValue()
+     //   viewModel.shoes.postValue(list)
     }
 
 //    fun setupRecylerview(){
@@ -75,7 +76,7 @@ class ShoeListFragment : Fragment() {
     }
 
     fun add(list:MutableList<Shoe>) {
-
+      //  args.shoe?.let { list.add(it) }
         val view = layoutInflater.inflate(R.layout.shoe_item_layout, null)
         val shoename = view.findViewById<TextView>(R.id.shoename)
         val company = view.findViewById<TextView>(R.id.company)
@@ -100,4 +101,19 @@ class ShoeListFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.logout_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId== R.id.loginFragment){
+            findNavController().navigate(R.id.action_shoeListFragment_to_loginFragment)
+            true
+        }else{
+            return NavigationUI.onNavDestinationSelected(item,view!!.findNavController())||super.onOptionsItemSelected(item)
+        }
+
+    }
 }

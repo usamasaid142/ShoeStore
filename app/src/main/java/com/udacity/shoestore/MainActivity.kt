@@ -28,10 +28,17 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController)
+
         val viewmodelfactory= ShoeviewmodelFactory()
         viewmodel= ViewModelProvider(this,viewmodelfactory).get(ShoeViewmodel::class.java)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
 
+                R.id.shoeListFragment,
+                R.id.shoeDetailFragment,
+
+                    ))
+        setupActionBarWithNavController(navController,appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {

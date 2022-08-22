@@ -44,11 +44,14 @@
             android:name="shoe"
             app:argType="com.udacity.shoestore.models.Shoe"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_shoeListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/shoeDetailFragment"
-        android:name="com.udacity.shoestore.ShoeDetailFragment"
+        android:name="com.udacity.shoestore.ui.ShoeDetailFragment"
         android:label="shoe_detailfragment"
         tools:layout="@layout/shoe_detailfragment" >
 
