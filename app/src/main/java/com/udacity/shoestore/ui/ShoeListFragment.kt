@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
@@ -34,7 +35,9 @@ class ShoeListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel=(activity as MainActivity).viewmodel
       //  setupRecylerview()
+
         callback()
+        initbutton()
     }
 
 //    fun setupRecylerview(){
@@ -48,6 +51,11 @@ class ShoeListFragment : Fragment() {
 //        }
 //    }
 
+    fun initbutton(){
+        binding.add.setOnClickListener {
+            navigatetoShoeDetail()
+        }
+    }
     fun callback() {
 
        viewModel.shoes.observe(viewLifecycleOwner, Observer {
@@ -84,7 +92,8 @@ class ShoeListFragment : Fragment() {
         }
     fun navigatetoShoeDetail()
     {
-
+     val action=ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment()
+        findNavController().navigate(action)
     }
 
 }
