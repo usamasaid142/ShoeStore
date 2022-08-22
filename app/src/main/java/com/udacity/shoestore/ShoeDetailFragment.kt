@@ -1,11 +1,11 @@
 package com.udacity.shoestore
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.ShoeDetailfragmentBinding
 import com.udacity.shoestore.models.Shoe
@@ -14,6 +14,7 @@ import com.udacity.shoestore.models.Shoe
 class ShoeDetailFragment : Fragment() {
 
     private lateinit var binding:ShoeDetailfragmentBinding
+    var shoe:Shoe?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,34 +27,34 @@ class ShoeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initbutton()
-        getshoeinfodetail()
+
     }
 
 
     fun initbutton(){
         binding.btnCancel.setOnClickListener {
-
-            //findNavController().navigate()
+            findNavController().navigate(R.id.action_shoeDetailFragment_to_shoeListFragment)
         }
         binding.btnSave.setOnClickListener {
-
-           // val action =
-
+            getshoeinfodetail()
+            val action=ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment(
+                shoe)
+            findNavController().navigate(action)
         }
     }
 
-    fun getshoeinfodetail():List<Shoe>{
-       val shoelist= mutableListOf<Shoe>()
-        if(binding.etShoeName.text.toString().isNullOrEmpty()&& binding.etSize.text.toString() as Double!=null&&
+    fun getshoeinfodetail(){
+        val size=binding.etSize.text.toString()
+        val d: Double = size.toDouble()
+        if(binding.etShoeName.text.toString().isNullOrEmpty()&& d!=null&&
         binding.etCompany.text.toString().isNullOrEmpty()&&binding.etDesc.text.toString().isNullOrEmpty()){
-            val shoe=Shoe(binding.etShoeName.text.toString(),binding.etSize.text.toString() as Double,
+            shoe=Shoe(binding.etShoeName.text.toString(),d,
                 binding.etCompany.text.toString(),binding.etDesc.text.toString())
-            shoelist.add(shoe)
+
         }else{
             Toast.makeText(requireContext(),"all fields required",Toast.LENGTH_LONG).show()
         }
 
-      return shoelist
     }
 
 

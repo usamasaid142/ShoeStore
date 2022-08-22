@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
@@ -21,6 +22,7 @@ class ShoeListFragment : Fragment() {
 
     private lateinit var binding:ShoelistfragmentBinding
     private lateinit var shoeAdapter:ShoeAdapter
+    private val args:ShoeListFragmentArgs by navArgs()
   lateinit var viewModel:ShoeViewmodel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +30,7 @@ class ShoeListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding=ShoelistfragmentBinding.inflate(layoutInflater,container,false)
+
         return binding.root
     }
 
@@ -38,6 +41,7 @@ class ShoeListFragment : Fragment() {
 
         callback()
         initbutton()
+        //viewModel.shoes.postValue()
     }
 
 //    fun setupRecylerview(){

@@ -25,8 +25,8 @@ class InstructionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnNavigate.setOnClickListener {
-            val action=InstructionFragmentDirections.actionInstructionFragmentToShoeListFragment()
-            findNavController().navigate(action)
+           // val action=InstructionFragmentDirections.actionInstructionFragmentToShoeListFragment()
+            findNavController().navigate(R.id.action_instructionFragment_to_shoeListFragment)
         }
     }
 }
