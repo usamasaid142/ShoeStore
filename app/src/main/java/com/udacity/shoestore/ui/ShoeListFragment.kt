@@ -2,14 +2,15 @@ package com.udacity.shoestore.ui
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
 import com.udacity.shoestore.adapter.ShoeAdapter
@@ -40,9 +41,8 @@ class ShoeListFragment : Fragment() {
         viewModel=(activity as MainActivity).viewmodel
       //  setupRecylerview()
 
-        callback()
         initbutton()
-     //   viewModel.shoes.postValue(list)
+        callback()
     }
 
 //    fun setupRecylerview(){
@@ -65,7 +65,10 @@ class ShoeListFragment : Fragment() {
 
        viewModel.shoes.observe(viewLifecycleOwner, Observer {
           // shoeAdapter.submitList(it)
-           add(it)
+           for(i in 0 until it.size){
+               add(it[i].name,it[i].company,it[i].size,it[i].description)
+           }
+
        })
 
         getshoes()
@@ -75,26 +78,23 @@ class ShoeListFragment : Fragment() {
         viewModel.setData()
     }
 
-    fun add(list:MutableList<Shoe>) {
-      //  args.shoe?.let { list.add(it) }
+    fun add(shname:String,shcompany:String,shsize:Double,shdesc:String) {
+
         val view = layoutInflater.inflate(R.layout.shoe_item_layout, null)
         val shoename = view.findViewById<TextView>(R.id.shoename)
         val company = view.findViewById<TextView>(R.id.company)
         val size = view.findViewById<TextView>(R.id.size)
         val desc = view.findViewById<TextView>(R.id.description)
 
+                shoename.text = shname
+                company.text = shcompany
+                size.text = shsize.toString()
+                desc.text = shdesc
 
-            for (i in 0 until list.size) {
-                binding.layoutOfItems.removeView(view)
-                shoename.text = list[i].name
-                company.text = list[i].company
-                size.text = list[i].size.toString()
-                desc.text = list[i].description
-                binding.layoutOfItems.addView(view)
-            }
+            binding.layoutOfItems.addView(view)
 
 
-        }
+    }
     fun navigatetoShoeDetail()
     {
      val action=ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment()
@@ -116,4 +116,7 @@ class ShoeListFragment : Fragment() {
         }
 
     }
+
+
+
 }

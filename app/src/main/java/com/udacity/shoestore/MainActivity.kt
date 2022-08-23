@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewmodel= ViewModelProvider(this,viewmodelfactory).get(ShoeViewmodel::class.java)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-
+                R.id.loginFragment,
                 R.id.shoeListFragment,
                 R.id.shoeDetailFragment,
 

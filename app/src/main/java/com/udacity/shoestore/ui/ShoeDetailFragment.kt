@@ -58,6 +58,7 @@ class ShoeDetailFragment : Fragment() {
 
               list.add(shoe)
             viewModel.shoes.postValue(list)
+            findNavController().navigate(R.id.action_shoeDetailFragment_to_shoeListFragment)
         }else{
             Toast.makeText(requireContext(),"all fields required",Toast.LENGTH_LONG).show()
         }
