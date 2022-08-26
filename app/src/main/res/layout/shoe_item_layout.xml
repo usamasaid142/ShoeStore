@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="data"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
+
+    <!--   easy to use ConstraintLayout in design -->
+    <!--   support mobile size -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,7 +48,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/design_default_color_secondary"
             android:textSize="20sp"
-            android:text=""
+            android:text="@={data.name}"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_company"
@@ -57,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_shoename"
             android:textSize="20sp"
             android:textColor="@color/design_default_color_secondary"
-            android:text=""
+            android:text="@={data.company}"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_size"
@@ -78,7 +90,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_company"
             android:textSize="20sp"
             android:textColor="@color/design_default_color_secondary"
-            android:text=""
+            android:text="@{String.valueOf(data.size)}"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_description"
@@ -99,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_size"
             android:textSize="20sp"
             android:textColor="@color/design_default_color_secondary"
-            android:text=""
+            android:text="@={data.description}"
             />
         <View
             android:layout_width="match_parent"
@@ -110,4 +122,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

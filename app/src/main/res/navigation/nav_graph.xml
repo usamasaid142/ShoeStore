@@ -40,10 +40,6 @@
         <action
             android:id="@+id/action_shoeListFragment_to_shoeDetailFragment"
             app:destination="@id/shoeDetailFragment" />
-        <argument
-            android:name="shoe"
-            app:argType="com.udacity.shoestore.models.Shoe"
-            app:nullable="true" />
         <action
             android:id="@+id/action_shoeListFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
