@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
@@ -22,9 +23,10 @@ class ShoeDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         // Inflate the layout for this fragment
         binding= ShoeDetailfragmentBinding.inflate(layoutInflater,container,false)
+        context ?: return binding.root
         return binding.root
     }
 
@@ -32,7 +34,6 @@ class ShoeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel=(activity as MainActivity).viewmodel
         initbutton()
-
     }
 
 
@@ -55,15 +56,17 @@ class ShoeDetailFragment : Fragment() {
             val d: Double = size.toDouble()
             val shoe=Shoe(binding.etShoeName.text.toString(),d,
                 binding.etCompany.text.toString(),binding.etDesc.text.toString())
-
-              list.add(shoe)
-            viewModel.shoes.postValue(list)
+            binding.shoe=shoe
+             list.add(shoe)
+           viewModel.shoes.postValue(list)
             findNavController().navigate(R.id.action_shoeDetailFragment_to_shoeListFragment)
         }else{
             Toast.makeText(requireContext(),"all fields required",Toast.LENGTH_LONG).show()
         }
 
     }
+
+
 
 
 }

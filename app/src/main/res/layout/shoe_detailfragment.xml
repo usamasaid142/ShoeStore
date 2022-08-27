@@ -8,6 +8,12 @@
     <!--   easy to use ConstraintLayout in design -->
     <!--   support mobile size -->
 
+    <data>
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,6 +39,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="15dp"
         android:inputType="text"
+        android:text="@={shoe.name}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,6 +64,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:inputType="text"
+        android:text="@={shoe.company}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
@@ -81,6 +89,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:inputType="numberDecimal"
+        android:text="@{String.valueOf(shoe.size)}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_Company" />
@@ -105,6 +114,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
         android:inputType="text"
+        android:text="@={shoe.description}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_Size" />
